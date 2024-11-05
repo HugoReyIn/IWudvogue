@@ -29,7 +29,7 @@ class Producto(models.Model):
     nombre_producto = models.CharField(max_length=100)
     precio = models.DecimalField(max_digits=10, decimal_places=2)  
     stock = models.PositiveIntegerField()
-    producto = models.ForeignKey('Revista', related_name = 'revistas', on_delete = models.CASCADE, null=True)
+    revista = models.ForeignKey('Revista', related_name = 'revistas', on_delete = models.CASCADE, null=True)
 
     def actualizar_precio(self, nuevo_precio):
         """Actualiza el precio del producto"""

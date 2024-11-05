@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Editorial
+from .models import Editorial, Revista, Producto
 from django.http import HttpResponse, HttpResponseNotFound
 
 
@@ -31,3 +31,8 @@ def detalleEDITORIAL(request, id_editorial):
 
     except Editorial.DoesNotExist:
         return HttpResponseNotFound("Editorial no encontrada")
+
+def listaProductos(request):
+    productos = Producto.objects.order_by('nombre_producto')
+    nombre_productos = ', '.join([producto.nombre_producto for producto in productos])
+    return HttpResponse(nombre_productos)
