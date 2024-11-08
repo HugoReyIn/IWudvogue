@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title> Lista de Editoriales </title>
+    </head>
+    <body>
+        <h1> Lista de Editoriales </h1>
+        <ul>
+            {% for editorial in lEditoriales %}
+                <a href="{% url editorial.id %}">
+                    <li> {{ editorial.nombre }} - {{ editorial.contacto }} </li>
+                </a>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

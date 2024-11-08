@@ -16,6 +16,8 @@ class Editorial(models.Model):
         return self.nombre
 
 class Revista(models.Model):
+    #no se
+    id_revista = models.AutoField(primary_key=True) 
     titulo = models.CharField(max_length=100)
     fecha_publi = models.CharField(max_length=100)
     numero_edicion = models.CharField(max_length=5)
