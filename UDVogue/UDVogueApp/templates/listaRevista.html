@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title> Lista Revistas </title>
+    </head>
+    <body>
+        <h1> Lista revistas </h1>
+        <ul>
+        {% for revista in lRevista %}
+            <li>
+                <a href="{% url revista.id %}">
+                    {{ revista.titulo }}. Publicada el {{ revista.fecha_publi }}, edicion {{ revista.edicion }}
+                </a>
+            </li>
+        {% endfor %}    
+        </ul>
+    </body>
+</html>
