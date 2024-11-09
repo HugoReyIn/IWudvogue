@@ -1,51 +1,46 @@
 from django.db import models
 
 class Editorial(models.Model):
-    nombre = models.CharField(max_length=100)
-    contacto = models.CharField(max_length=10)
+    nombre = models.CharField(max_length=80)
+    cif = models.CharField(max_length=12)
 
-    def agregar_revista(self, revista):
-        """Agrega una revista a la lista de revistas publicadas"""
-        self.revistas_publicadas.add(revista)
-    
-    def mostrar_revistas(self):
-        """Muestra los títulos de las revistas publicadas por la editorial"""
-        return [revista.titulo for revista in self.revistas_publicadas.all()]
+    def agregarRevista(self, revista):
+        self.revistas.add(revista)
+
+    def mostrarRevistas(self):
+        return [revista.titulo for revista in self.revistas.all()]
 
     def __str__(self):
         return self.nombre
 
 class Revista(models.Model):
-    #no se
-    id_revista = models.AutoField(primary_key=True) 
-    titulo = models.CharField(max_length=100)
-    fecha_publi = models.CharField(max_length=100)
-    numero_edicion = models.CharField(max_length=5)
-    editorial = models.ForeignKey('Editorial', related_name = 'editoriales', on_delete = models.CASCADE, null=True)
+    editorial = models.ForeignKey(Editorial, on_delete = models.CASCADE, related_name = "revistas", null = True)
+    titulo = models.CharField(max_length=50)
+    numeroEdicion = models.IntegerField(default = 1)
+    fechaPublicacion = models.DateField()
 
     def __str__(self):
-        return f"{self.titulo} (Edición {self.numero_edicion})"
+        return f"{self.titulo} (Edición {self.numeroEdicion})"
 
 
 class Producto(models.Model):
-    nombre_producto = models.CharField(max_length=100)
-    precio = models.DecimalField(max_digits=10, decimal_places=2)  
-    stock = models.PositiveIntegerField()
-    revista = models.ForeignKey('Revista', related_name = 'revistas', on_delete = models.CASCADE, null=True)
+    revista = models.ForeignKey(Revista, on_delete = models.CASCADE, related_name = "productos", null = True)
+    nombreProducto = models.CharField(max_length = 60)
+    talla = models.CharField(max_length = 3)
+    color = models.CharField(max_length = 10)
+    precio = models.DecimalField(max_digits = 5, decimal_places = 2)
+    stock = models.IntegerField(default = 0)
 
-    def actualizar_precio(self, nuevo_precio):
-        """Actualiza el precio del producto"""
+    def actualizarPrecio(self, nuevo_precio):
         self.precio = nuevo_precio
         self.save()
 
-    def ajustar_stock(self, cantidad):
-        """Ajusta el stock disponible en función de la cantidad especificada"""
-        self.stock = max(0, self.stock + cantidad)  # Evitar stock negativo
+    def ajustarStock(self, cantidad):
+        self.stock = max(0, self.stock + cantidad)
         self.save()
 
-    def mostrar_informacion(self):
-        """Muestra la información completa del producto"""
-        return f"Producto: {self.nombre_producto}, Precio: {self.precio}, Stock: {self.stock}"
+    def mostrarInformacion(self):
+        return f"Producto: {self.nombreProducto}, Precio: {self.precio}, Stock: {self.stock}"
 
     def __str__(self):
-        return self.nombre_producto
+        return self.nombreProducto

@@ -17,12 +17,6 @@ urlpatterns = [
     path('revista/<int:id_revista>', views.listaDetalleRevista, name='detalleRevista'),
 
     path('producto/<int:id_producto>', views.listadoDetallesProdcto, name='detalleProducto')
-
-
-
-
-    path('listadoDeEditoriales/', views.listaEditoriales, name='listaE'),
-    path('editoriales/<int:id_editorial>/', views.detalleEDITORIAL, name="detalle"),
 ]
 
 
