@@ -1,9 +1,7 @@
 from django.urls import path
 from . import views
 
-urlpatterns = [
-    path('', views.index, name='index'),
-    path('inicio' views.inicio, name='index'),
+urlpatterns = [ 
 
     path('editoriales/', views.listaEditoriales, name = 'listaEditoriales'),
     path('editoriales/<int:id_editorial>', views.detalleEditorial, name = 'detalleEditorial'),
@@ -12,7 +10,7 @@ urlpatterns = [
     path('revistas/<int:id_revista>', views.detalleRevista, name = 'detalleRevista'),
 
     path('productos/', views.listaProductos, name = 'listaProductos'),
-    path('productos/<int:id_producto', views.detalleProducto, name = 'detalleProducto'),
+    path('productos/<int:id_producto>', views.detalleProducto, name = 'detalleProducto'),
 
     path('editorialesHtml/', views.listaEditorialHtml, name = 'listaEditorialHtml'),
     path('editorialesHtml/<int:id_editorial>', views.detalleEditorialHtml, name = 'detalleEditorialHtml'),
