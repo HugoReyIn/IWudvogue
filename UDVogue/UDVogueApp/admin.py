@@ -1,8 +1,7 @@
 from django.contrib import admin
+from .models import Editorial, Revista, Producto
 
 # Register your models here.
-
-from .models import Editorial, Revista, Producto
 
 admin.site.register(Editorial)
 admin.site.register(Revista)
